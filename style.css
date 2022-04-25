@@ -1,0 +1,81 @@
+
+*{
+    color:#008800;
+    word-break:break-all;
+
+}
+
+body{
+    background-color:#000000;
+}
+
+h2{
+    color:#00AF55;
+    text-align:center;
+}
+
+a{
+    color:#0005A0;
+}
+
+button{
+    border-radius: 3px;
+    font: 9pt "Arial";
+    font-size: 20px;
+    background-color: #000000;
+    color: #00EEA0;
+    padding-top:0px;
+}
+
+
+.whoami{
+    text-align:center;
+}
+
+
+.leftDiv{
+    float:left;
+    color:#004CA0;
+    width:20%;
+    line-height:40px;  
+}
+.followDiv{
+    float:left;
+    background-color:#001010;
+    color:#004CA0;
+    width:18%;
+    line-height:40px;  
+    border: 2px solid rgb(85, 0, 255);
+    background-color: #000000;
+    position:fixed;
+    margin:5px; 
+}
+
+.rightFollowDiv{
+    float:right;
+    background-color:#008010;
+    width:18%;
+    line-height:40px; 
+    border: 2px solid rgb(85, 0, 255);
+    background-color: #000000;
+    position:fixed;
+    margin:15px;
+    top:57%;
+}
+
+.rightDiv{
+    float:right;
+    width:20%;
+    text-align:center;
+}
+
+.centerDiv{
+    float:left;
+    width:60%;
+    height:700px;
+}
+
+
+.TOP{
+    text-align:center;
+}
