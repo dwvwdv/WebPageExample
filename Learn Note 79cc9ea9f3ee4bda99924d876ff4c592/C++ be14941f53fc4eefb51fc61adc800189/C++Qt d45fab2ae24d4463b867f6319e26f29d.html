@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C++Qt</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d45fab2a-e24d-4463-b867-f6319e26f29d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛠️</span></div><h1 class="page-title">C++Qt</h1></header><div class="page-body"><figure id="1746ec4d-6424-4b71-961c-6d774302fec9" class="link-to-page"><a href="C++Qt%20d45fab2ae24d4463b867f6319e26f29d/%E5%B8%B8%E7%94%A8%E8%BC%AA%E5%AD%90%201746ec4d64244b71961c6d774302fec9.html"><span class="icon">⚙️</span>常用輪子</a></figure><figure id="8af8646f-d962-4752-9143-19c5dbf62428" class="link-to-page"><a href="C++Qt%20d45fab2ae24d4463b867f6319e26f29d/%E4%BA%8B%E4%BB%B6%E8%A7%B8%E7%99%BC%E6%A9%9F%E5%88%B6%208af8646fd9624752914319c5dbf62428.html">事件觸發機制</a></figure><p id="5787228f-838f-42c1-8cdd-6c7669423f52" class="">
+</p><nav id="27a5bafd-aab5-4f08-a186-68ed2b05b2a2" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1b57ba0d-39a3-4ca1-959d-82aeb8b3d791">Qt基本模塊</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d3dd54e6-5fbc-44ea-bc3c-e80156360fba">Hot key</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#aba94afa-5523-4894-bb1c-4ecb3034d67c">基本檔案介紹</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#147b59ef-027c-4ade-990f-f3764c07cb08"><mark class="highlight-teal">.pro</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#674fcb73-f7f2-4b97-a0b4-20995040f111"><mark class="highlight-teal">.qrc</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#69060478-e53f-4cc6-973c-d05fbe2c2ce9"><mark class="highlight-teal">.ui</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#42828f34-d58d-406c-ae51-56cb20a7a38a">內存回收機制</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5ea7ecd6-daba-4597-b492-f891ed89bda7">connect、信號、槽理解</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f3c9ffc-dc3e-4b98-a53a-ec7107965383">理解方式</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b07adc55-ff74-45b2-802a-1deb4cddfcd2">因果關係觸發</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a0278885-45ab-4e6d-bda0-c2f5fb8c7a8c">同時</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6a8fd40e-0237-4943-a92d-35eaa5eb0442">信號槽</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c09ee4eb-205a-4aec-952c-199e413f7870">Signal 與 Slot</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f2b04a32-ac0e-458e-a04f-1c82c1aaeabe">Connect</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dbf99c64-ea13-4ec4-b351-38a0412f2881">Qt記憶體回收機制</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b827f25d-bec3-437e-a563-6d344dc37a5d">對話框阻塞與非阻塞</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6a64c4ab-667d-43c3-b6d0-f4f7d0085f02">Qt可能會被坑的地方</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#deff470a-44c9-4749-8c87-0d090364ebf3">文字</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cb745f06-bfc1-4bc6-8a0d-c73a3e141f16">圖片</a></div></nav><h1 id="1b57ba0d-39a3-4ca1-959d-82aeb8b3d791" class="">Qt基本模塊</h1><ul id="917cf76a-3203-4a1b-867e-2528d8308024" class="bulleted-list"><li style="list-style-type:disc">Qt Widgets</li></ul><ul id="b5565c0b-250f-405b-a79e-af19b9068c87" class="bulleted-list"><li style="list-style-type:disc">Qt Webkit</li></ul><ul id="78118706-fbfa-42f1-abdd-24e40458c3af" class="bulleted-list"><li style="list-style-type:disc">Qt SQL</li></ul><ul id="87f4846f-c805-4368-af83-2a5613adce80" class="bulleted-list"><li style="list-style-type:disc">Qt Quick</li></ul><ul id="8cbd808e-72c9-4dba-83c5-345774bf8849" class="bulleted-list"><li style="list-style-type:disc">Qt QML</li></ul><ul id="209f7db6-d3ee-4845-a81f-f0c796136aee" class="bulleted-list"><li style="list-style-type:disc">Qt Mulitmedia Widgets</li></ul><ul id="90ce3371-42f7-45ab-8dea-b059044ccbef" class="bulleted-list"><li style="list-style-type:disc">Qt Core</li></ul><ul id="2c187965-e5e1-4f81-b9a6-5ae30f41ad75" class="bulleted-list"><li style="list-style-type:disc">Qt GUI</li></ul><ul id="9df51ccf-114e-481c-b4b6-14dec9c642fb" class="bulleted-list"><li style="list-style-type:disc">Qt Network</li></ul><ul id="2de7eff1-7f2a-410b-a991-f1bcbcd5aec2" class="bulleted-list"><li style="list-style-type:disc">Qt Mulitmedia</li></ul><ul id="6d7de7f0-12c8-4d9b-9027-4632b7a82dd9" class="bulleted-list"><li style="list-style-type:disc">Qt Quick Controls</li></ul><ul id="a14138be-30ec-4a6e-b56d-9a1f524d0d13" class="bulleted-list"><li style="list-style-type:disc">Qt Quick Dialogs</li></ul><p id="03ef69dd-9c2b-40a7-b246-b6ed41e1a6c9" class="">
+</p><p id="e4d16d5c-18d2-4e98-bc8a-41e307dcb4c3" class="">Q_OBJECT</p><p id="349c7efe-c52d-45e8-a980-43e3e5bb3559" class="">信號和信號槽所使用的巨集</p><p id="b38cf993-9bdb-4490-a4ee-4c28f339709a" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="8bc4378e-a4d3-4e9b-9a93-2ee43b8683bd"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">UI中的物件ObjectName和cpp中的Object是相通的，要依靠此關係呼叫。
+QPushButton *btn = ui-&gt;DesignBtn;</div></figure><p id="a6f135cb-bb4a-4058-ba0f-ad8c00ca5ea9" class="">
+</p><p id="6e2f69c1-442e-44c7-b74c-84feefb60b33" class="">
+</p><h1 id="d3dd54e6-5fbc-44ea-bc3c-e80156360fba" class="">Hot key</h1><p id="f20feb84-e13b-4134-9388-4a2e3600c5d4" class="">F1 幫助，可以得到當前的類是基於甚麼衍伸出來的(ESC返回</p><p id="fbc6927f-cedc-42a9-96c6-88cdbfd79b4d" class="">F2 快速跳至function的宣告與實現</p><p id="f0abb8b2-6ca8-4c65-b63e-d9f9f3c3a274" class="">F4 class cpp 與之對應的 .h快速切換</p><p id="735f08e9-2932-4ead-9c8d-3039d8775c70" class="">
+</p><h1 id="aba94afa-5523-4894-bb1c-4ecb3034d67c" class="">基本檔案介紹</h1><h2 id="147b59ef-027c-4ade-990f-f3764c07cb08" class=""><mark class="highlight-teal">.pro</mark></h2><p id="9eeb223f-7d4d-49fa-a85a-b2196304f96b" class=""><code>QT</code> += <code>QT基本模塊</code></p><p id="160e0e14-b9c3-4de3-95ba-bda324e06779" class=""><code>TARGET</code> = 生成執行檔檔名</p><p id="04153b4f-824c-441d-887b-503762273eed" class=""><code>TEMPLATE</code> = 指定生成makefile類型 <code>lib</code>、<code>app</code></p><p id="0c8745cb-592b-40db-8eab-bea8387c9af4" class="">
+</p><p id="6821711a-89d5-4d9a-a83f-595636528692" class=""><code>SOURCES</code> += 專案連結的程式碼(cpp)</p><p id="7ee1a433-5819-4740-a2a0-20ef5637b6fa" class=""><code>HEADERS</code> += 專案連結的表頭檔(.h)</p><p id="88c36109-879d-4603-8bc9-844d5a743b95" class="">
+</p><p id="ceffab6d-bf85-41de-909e-aef94269b525" class=""><code>CONFIG</code> += <code>c++11</code>(版本)</p><p id="48f06892-51e4-4200-91c6-c53e53db2e89" class="">
+</p><h2 id="674fcb73-f7f2-4b97-a0b4-20995040f111" class=""><mark class="highlight-teal">.qrc</mark></h2><p id="8729041c-4137-41a5-823a-f355f848b6e8" class="">新建一個Qt Resource file，往裡面放資源，做資源管理</p><p id="e2e0c677-23aa-451d-a79f-a9c906700b35" class="">調用qrc資源方式，冒號+前綴+檔名</p><pre id="9294ce14-f7f2-4d10-8197-9b289604d524" class="code"><code>ui-&gt;actionOpen-&gt;setIcon(QIcon(&quot;:/icon.ico&quot;));</code></pre><p id="1026d0f1-f9bf-4c0c-ab13-017e7ae74945" class="">qrc在打包時，會直接一併轉成二進制，所以不用再依賴圖片路徑</p><h2 id="69060478-e53f-4cc6-973c-d05fbe2c2ce9" class=""><mark class="highlight-teal">.ui</mark></h2><ul id="6537f8c1-ca90-40c2-a63b-6c313d89d3ea" class="bulleted-list"><li style="list-style-type:disc">ui指標</li></ul><p id="9a5d1f36-0d49-42eb-bdfa-84468c667b14" class="">用來訪問所有ui裡的物件成員</p><ul id="ad7e6bdc-5092-47b8-b4f8-47307522eda7" class="bulleted-list"><li style="list-style-type:disc">QMenu</li></ul><p id="4db8c16d-7616-4350-b418-f527e475bb30" class="">只能有一個，選單式功能</p><ul id="83f37c28-ff11-4617-af4a-f60d08629b6e" class="bulleted-list"><li style="list-style-type:disc">toolbar</li></ul><p id="eb35fa44-e953-419a-b2f6-f94404a8ab45" class="">可以有很多個，快速打開的功能，常用的QMenu可以給使用者自定義</p><ul id="40bed4df-2186-494d-9951-7a1a5efe441d" class="bulleted-list"><li style="list-style-type:disc">statusbar</li></ul><p id="1a4fb634-0ec7-4c0f-8ff0-72a54592245f" class="">只能有一個，最底層，通常拿來給應用程式顯示目前特定狀態，讓使用者快速觀察</p><ul id="2fd22c89-c969-4aa9-b484-61007488473b" class="bulleted-list"><li style="list-style-type:disc">dockwidget</li></ul><p id="41d1c76d-b162-4d36-908d-6cb4cf455002" class="">可以有很多個，拖動窗口，給使用者自定義窗口布局</p><p id="cd974fe3-fb12-4f75-abdd-70e07c5f0a1a" class="">
+</p><h1 id="42828f34-d58d-406c-ae51-56cb20a7a38a" class="">內存回收機制</h1><p id="35c182de-10a2-4cd8-8d59-5e266a035875" class="">從QOBJECT繼承的類 1直接 2間接</p><p id="bccd7db2-4176-4c67-a7d9-9a99759b1c86" class="">指定父類，父類別建構時，先建構他的子類</p><p id="4b9d4a38-904b-4992-b387-8cac6d78ef7b" class="">
+</p><p id="9cae6465-0e4c-4adb-ad4a-05e2c128bdc2" class="">QDebug</p><p id="a95d2727-a2f8-4399-8bae-64de523efb8a" class="">qDebug() &lt;&lt; &quot;this is qt output.&quot;;</p><p id="3c504ccf-9fb4-4199-9fdc-75268f8490dd" class="">
+</p><p id="31a6d7a7-249d-4550-b05c-225925035bed" class="">
+</p><h1 id="5ea7ecd6-daba-4597-b492-f891ed89bda7" class="">connect、信號、槽理解</h1><blockquote id="7a1a1c7d-0c1f-405e-83b3-c0fa2f6f3659" class=""><strong>connect(&amp; obj, action, &amp; obj2, action2)</strong></blockquote><h2 id="4f3c9ffc-dc3e-4b98-a53a-ec7107965383" class="">理解方式</h2><h3 id="b07adc55-ff74-45b2-802a-1deb4cddfcd2" class="">因果關係觸發</h3><p id="81b996d5-4a07-4abb-b9c3-fcaa9197509c" class="">因為a對c做了b事件，導致c觸發d事件</p><p id="94cb9b1d-cead-40a8-ac53-2983e1c2c7ca" class="">其中b扮演著信號，d扮演著槽函數，而a與c皆為物件</p><p id="49b9272a-d0f1-4d0a-96e3-5e836dbd6782" class="">例如：我罵了你，導致你很難過</p><p id="40bc4e03-b9c8-4e75-950a-90a791dde9ad" class="">這個情境中<code>a</code>為我，<code>c</code>為你，<code>b</code>是罵人這件事，c因為被罵觸發了<code>d</code>很難過</p><h3 id="a0278885-45ab-4e6d-bda0-c2f5fb8c7a8c" class="">同時</h3><p id="776e8469-4555-4de1-a7ac-fa1cd82d6bda" class="">a做了b事件，同時c做了d事件</p><p id="46d8648f-4e9b-4ae9-b77d-ca366af5419e" class="">例如：點擊按鈕，關閉視窗。</p><p id="7bdb6368-b3c3-4bf6-b4f7-678591a1354d" class="">這個情境中按鈕為<code>a</code>，點擊為<code>b</code>，視窗為<code>c</code>，關閉為<code>d</code>。</p><p id="1766e035-c297-4144-a882-a44517c71396" class="">以上兩種理解方式我更傾向第一種，也更符合訊號與槽的感覺，不過看人習慣。</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="cae61ce5-b30a-4f04-9e32-99ad35abd43d"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">訊號函數只需宣告，不需定義。<p id="f8f36189-7fc6-4208-8a51-e2c84b19a5e4" class="">但槽函數需要宣告，也需定義。</p></div></figure><h2 id="6a8fd40e-0237-4943-a92d-35eaa5eb0442" class="">信號槽</h2><h3 id="c09ee4eb-205a-4aec-952c-199e413f7870" class="">Signal 與 Slot</h3><p id="3176e4ad-d6b6-4c66-82e1-fac3655c9319" class="">可以是成員函數、全域函數、靜態函數、lambda表達式</p><p id="80ff14c5-27c6-478b-b7de-9b4d17988753" class="">槽函數要與信號對應(返回值、參數)</p><p id="0f4f61c5-16b9-4fbd-84ed-16a0a2945fad" class="">信號沒有返回值，槽函數就是void</p><p id="b473ccf6-991d-45fb-af6d-bdc59d27d066" class="">例如：</p><pre id="7dc6ae87-7136-4eea-a8d5-a15abf11f7bd" class="code"><code>void signal(int , QString );
+void slot(int , QString );</code></pre><p id="56ba6e15-c2d6-477e-8ee1-600ed8f486da" class="">槽函數參數是為了接收信號傳遞過來的數據</p><p id="348bd7c0-40f7-4bb1-a3ee-2bf22af6dd1b" class="">信號函數參數永遠不能比槽函數參數少</p><p id="8ab24a05-e696-4b61-9f5d-8224f3c73c83" class="">槽函數可以重載</p><p id="25706222-0b8f-4711-b33e-a0149d2c03f0" class="">
+</p><p id="c3aed1b7-2441-45de-8f50-9adaab090b61" class="">跨窗口發訊號，使用emit</p><h3 id="f2b04a32-ac0e-458e-a04f-1c82c1aaeabe" class="">Connect</h3><pre id="09c09cb1-2f0c-4674-9bfa-a334e746fc23" class="code"><code>//Qt5 Signals Slots
+connect(object, object::action, object2, object2::action2)
+
+//多載寫法
+void (subWidget::*signalReload_noparam)() = &amp;subWidget::signalcloseWindow;
+void (subWidget::*signalReload_2param)(int , QString) = &amp;subWidget::signalcloseWindow;
+connect(&amp;subW,signalReload_noparam,this,&amp;MainWindow::slotShowMe);
+connect(&amp;subW,signalReload_2param,this,&amp;MainWindow::slotsubMsg);
+
+//Qt4 Signals Slots
+connect(object, SIGNAL(action()), object2, SLOT(action2));
+
+//多載寫法
+connect(object, SIGNAL(action()), object2, SLOT(action2));
+connect(object, SIGNAL(action(int ,QString )), object2, SLOT(action2(int ,QString )));</code></pre><p id="ba4333dc-fa12-46ff-ade5-f702b738b9f0" class="">Qt4的訊號槽看起來很簡潔，但有一個致命的缺陷導致後面Qt5在訊號槽這塊不使用宏定義(SIGNAL和SLOT)，因為一旦發生錯誤，Qt4是可能連報錯也不報錯的，難以debug。</p><p id="162c9fc6-26ad-4635-952c-5e496c972459" class="">
+</p><p id="95e84d73-fa95-41d8-8a44-952a34933d78" class="">
+</p><h1 id="dbf99c64-ea13-4ec4-b351-38a0412f2881" class="">Qt記憶體回收機制</h1><p id="ba366fba-575d-40f2-aebc-fd9123d18fa9" class="">滿足以下兩個條件不須手動釋放記憶體</p><ol type="1" id="01403460-fefd-4f24-9157-d70d8ac78dce" class="numbered-list" start="1"><li>使用QObject類或他的子類</li></ol><ol type="1" id="561e88e2-89d5-4f5c-9c75-4e9e464c5837" class="numbered-list" start="2"><li>直接或間接派生的類，指定父類別</li></ol><h1 id="b827f25d-bec3-437e-a563-6d344dc37a5d" class="">對話框阻塞與非阻塞</h1><p id="801e6c64-f8ba-4761-b2c6-e474876f68fd" class="">阻塞是指還未關閉子窗口前，父窗口無法進行任何操作</p><p id="cea23b62-9b4e-4782-a9f3-b21d947e2813" class="">非阻塞則是父子窗口都可進行操作</p><p id="be2bca06-983f-4215-ba3d-7d34e8daf760" class="">拿QDialog類舉例</p><p id="e471c15e-1a5f-462a-8a9c-531eaeef9e42" class="">阻塞寫法</p><pre id="b3cd516c-77e4-4eed-bcfb-ab2693ec7e4f" class="code"><code>connect(btn,&amp;QPushButton::clicked,this,[=](){
+	QDialog dlg(this);
+	dlg.exec();
+});
+</code></pre><p id="e4c1d5d5-ae8a-4e12-b86e-c93b846996be" class="">非阻塞寫法，<code>Qt::WA_DeleteOnClose</code>可以在關閉時馬上銷毀子窗口</p><pre id="3fe35cc9-3aa0-453f-bf81-c58c5e3d8488" class="code"><code>connect(btn,&amp;QPushButton::clicked,this,[=](){
+	QDialog *dlg(this);
+	dlg-&gt;setAttribute(Qt::WA_DeleteOnClose);
+	dlg-&gt;show();
+});</code></pre><h1 id="6a64c4ab-667d-43c3-b6d0-f4f7d0085f02" class="">Qt可能會被坑的地方</h1><h2 id="deff470a-44c9-4749-8c87-0d090364ebf3" class="">文字</h2><p id="3d08e67d-6ed7-483a-8cf3-f720a1674789" class=""><code>QPlainTextEdit</code>取得內容是用<code>toPlainText()</code>函式，而不是getXXXXX()</p><pre id="14dcae77-a960-4cfd-9f88-3557f515ae1a" class="code"><code>QPlainTextEdit *input = new QPlainTextEdit(&quot;&quot;);
+qDebug() &lt;&lt; input-&gt;toPlainText();</code></pre><h2 id="cb745f06-bfc1-4bc6-8a0d-c73a3e141f16" class="">圖片</h2><p id="cf0af59e-b961-486f-98e8-8a72a7a626b6" class=""><code>QPicture</code>代表的不是圖片，<code>QPixmap</code>才是</p><pre id="88b321bd-7772-4bcc-b8d2-f32e92a45d23" class="code"><code>void  setPicture(const QPicture &amp;picture);
+void  setPixmap(const QPicture &amp;pixmap);</code></pre></div></article></body></html>

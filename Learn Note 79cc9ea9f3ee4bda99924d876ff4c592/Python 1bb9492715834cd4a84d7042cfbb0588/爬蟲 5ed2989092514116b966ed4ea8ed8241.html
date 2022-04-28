@@ -1,0 +1,734 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>爬蟲</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5ed29890-9251-4116-b966-ed4ea8ed8241" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🐛</span></div><h1 class="page-title">爬蟲</h1></header><div class="page-body"><figure id="9e0e9f4f-006d-4e41-a2e4-a46777d84ff1" class="link-to-page"><a href="%E7%88%AC%E8%9F%B2%205ed2989092514116b966ed4ea8ed8241/bs4(BeautifulSoup)%209e0e9f4f006d4e41a2e4a46777d84ff1.html"><span class="icon">🧿</span>bs4(BeautifulSoup)</a></figure><figure id="8c2bcc30-3cf9-4c2c-9d46-87047a5982d3" class="link-to-page"><a href="%E7%88%AC%E8%9F%B2%205ed2989092514116b966ed4ea8ed8241/Selenium%208c2bcc303cf94c2c9d4687047a5982d3.html"><span class="icon">💡</span>Selenium</a></figure><figure id="6b350dee-846d-49d8-b3e4-4339eea529cb" class="link-to-page"><a href="%E7%88%AC%E8%9F%B2%205ed2989092514116b966ed4ea8ed8241/Json%206b350dee846d49d8b3e44339eea529cb.html"><span class="icon">📑</span>Json</a></figure><figure id="ac6e60c0-3b29-4e5b-81a2-5746adfc98f1" class="link-to-page"><a href="%E7%88%AC%E8%9F%B2%205ed2989092514116b966ed4ea8ed8241/CSS%E5%8A%A0%E5%AF%86%E5%8F%8D%E7%88%AC%20ac6e60c03b294e5b81a25746adfc98f1.html"><span class="icon">🍃</span>CSS加密反爬</a></figure><figure id="a9bee20c-4609-4eed-a948-95ec67e4e100" class="link-to-page"><a href="%E7%88%AC%E8%9F%B2%205ed2989092514116b966ed4ea8ed8241/requests%20exceptions%20ConnectionError%20a9bee20c46094eeda94895ec67e4e100.html"><span class="icon">❗</span>requests.exceptions.ConnectionError</a></figure><nav id="ae046a00-5a78-48d1-aac1-8c6fd739da05" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ae37c48-4494-460a-8dd0-0b12ee2d97bc">urllib庫</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb30a359-5bbf-4ab9-8539-255503d17960">request</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7dad84ee-1e28-4688-a82b-f46fe578304f">requests庫</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#abd5a7cc-12fa-4128-9ec2-7c587dadf82f">get(url , cookies , params , headers , timout)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9dd77e14-0b36-4fc3-9ec6-08994130a374">post(url , data , files , json)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#47c58647-7014-4fc9-a179-99d6b57fa665">put(url , data)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#30cb920d-6b4e-4aed-9ae1-c29a6228566f">delete(url)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c7bf2064-3561-4004-bf2d-05f0d534d42d">head(url)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8fc4778e-3fb5-4c28-9096-ed54f86ef791">options(url)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ac38471-4a53-4424-8220-92231e14d137">response 訪問後回傳值操作</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7046363a-4c7f-4c5b-9e68-e385824b6b71">response.content 與 response.text差別</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#54029d82-5fc8-44e0-8305-8946293429f0">其他庫</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#21da4462-ca40-479b-b3fd-5e27bca9025e">補充</a></div></nav><h1 id="2ae37c48-4494-460a-8dd0-0b12ee2d97bc" class="">urllib庫</h1><h2 id="eb30a359-5bbf-4ab9-8539-255503d17960" class="">request</h2><ul id="235341d4-7e5d-464f-8060-9a750b3fb172" class="bulleted-list"><li style="list-style-type:disc">urlopen(url , data = None ,[timeout ]*)</li></ul><ul id="b75b0dc0-8dc2-4514-bd78-6eae610a66bb" class="bulleted-list"><li style="list-style-type:disc">Request(url , data = None ,header = {}, method = None)</li></ul><p id="6f2b0e8f-9b83-450a-800d-1e9c5c936b48" class="">
+</p><p id="8efec859-48d4-478a-bab9-7fe015bbd9b1" class="">urlopen默認GET request,傳參後為 POST request</p><p id="6f17e871-5eb0-4819-bd93-a8c15f60f8a2" class="">urlopen 參數 <strong>timeout </strong>設置請求超時時間</p><h1 id="7dad84ee-1e28-4688-a82b-f46fe578304f" class="">requests庫</h1><h2 id="abd5a7cc-12fa-4128-9ec2-7c587dadf82f" class="">get(url , cookies , params , headers , timout)</h2><ul id="fce6010a-0845-4d7b-9b94-8c7c14bb754e" class="bulleted-list"><li style="list-style-type:disc">cookies </li></ul><pre id="9b8b08e1-0b29-4eed-9fe7-c6f6ba2d7813" class="code"><code>url = &#x27;https://httpbin.org/cookies&#x27;
+cookies = dict(cookies_name = &quot;cookies_value&quot;)
+response = requests.get(url , cookies = cookies)
+response.text
+
+#result -&gt; &#x27;{&quot;cookies&quot;: {&quot;cookies_name&quot;: &quot;cookies_value&quot;}}&#x27;</code></pre><ul id="46b3d3b0-732d-49b4-9bb4-53794e5e06ba" class="bulleted-list"><li style="list-style-type:disc">params</li></ul><pre id="7599ace1-1944-4ce5-8a33-a8a7b0e84c92" class="code"><code>url = &#x27;https://httpbin.org/get&#x27;
+payload = {&quot;key&quot; : [&quot;value&quot;,&quot;666&quot;]}
+response = requests.get(url ,params = payload)
+print(response.text)
+
+&quot;&quot;&quot;
+&quot;args&quot;: {
+    &quot;key&quot;: [
+      &quot;value&quot;, 
+      &quot;666&quot;
+    ]
+  },...
+&quot;&quot;&quot;</code></pre><ul id="51e70b6f-bb46-4d23-9ae8-5de730de4135" class="bulleted-list"><li style="list-style-type:disc">headers</li></ul><pre id="2740c396-bbae-48b5-b237-8433589b5802" class="code"><code>url = &#x27;https://httpbin.org/get&#x27;
+headers = {&#x27;user-agent&#x27;: &#x27;dwvwdv/0.0.1&#x27;}
+response = requests.get(url ,headers = headers)
+print(response.text)
+
+&quot;User-Agent&quot;: &quot;dwvwdv/0.0.1&quot;</code></pre><h2 id="9dd77e14-0b36-4fc3-9ec6-08994130a374" class="">post(url , data , files , json)</h2><ul id="eed20fdd-24d4-4f6d-b2f8-2c2e58818e09" class="bulleted-list"><li style="list-style-type:disc">data</li></ul><pre id="39307ddf-602d-4080-9d03-eb409ceb74eb" class="code"><code>url = &#x27;https://httpbin.org/post&#x27;
+payload = {&quot;key&quot; : &quot;value&quot;}
+response = requests.post(url , payload)
+response.text
+
+
+&quot;&quot;&quot;
+&quot;args&quot;: {}, 
+  &quot;data&quot;: &quot;&quot;, 
+  &quot;files&quot;: {}, 
+  &quot;form&quot;: {
+    &quot;key&quot;: &quot;value&quot;  #payload data
+  }...
+&quot;&quot;&quot;</code></pre><ul id="49577d19-d474-4356-8451-63ede7670631" class="bulleted-list"><li style="list-style-type:disc">files</li></ul><pre id="de31727a-efcd-4911-931c-cad3d4e2368a" class="code"><code>url = &#x27;https://httpbin.org/post&#x27;
+files = {&#x27;file&#x27;: open(&#x27;upload.txt&#x27;,&#x27;rb&#x27;)}
+response = requests.post(url ,files = files)
+print(response.text)
+
+&quot;&quot;&quot;
+&quot;files&quot;: {
+    &quot;file&quot;: &quot;# -*- coding: utf-8 -*-\r\n\&quot;\&quot;\&quot;\r\nCreated on Sat Mar 27 17:26:38 2021\r\n\r\n@author: USER\r\n\&quot;\&quot;\&quot;\r\nimport requests\r\n\r\nurl = &#x27;https://httpbin.org/post&#x27;\r\nfiles = {&#x27;file&#x27;: open(&#x27;nb.txt&#x27;,&#x27;rb&#x27;)}\r\nresponse = requests.post(url ,files = files)\r\nprint(response.text)&quot;
+  },
+&quot;&quot;&quot;</code></pre><ul id="f05eab38-e1a0-4776-91fc-3e91620cfc49" class="bulleted-list"><li style="list-style-type:disc">json</li></ul><pre id="1c018bc2-ca91-4c44-b2c9-d8caf17bcb24" class="code"><code>url = &#x27;https://httpbin.org/post&#x27;
+payload = {&quot;key&quot; : [&quot;value&quot;,&#x27;666&#x27;]}
+response = requests.post(url ,json = payload)
+print(response.text)
+
+&quot;&quot;&quot;
+&quot;data&quot;: &quot;{\&quot;key\&quot;: [\&quot;value\&quot;, \&quot;666\&quot;]}&quot;,
+...中間略
+&quot;json&quot;: {
+    &quot;key&quot;: [
+      &quot;value&quot;, 
+      &quot;666&quot;
+    ]
+  },
+&quot;&quot;&quot;</code></pre><ul id="53c38c2f-561e-404f-aaab-cbb794ec975b" class="bulleted-list"><li style="list-style-type:disc">timeout</li></ul><h2 id="47c58647-7014-4fc9-a179-99d6b57fa665" class="">put(url , data)</h2><h2 id="30cb920d-6b4e-4aed-9ae1-c29a6228566f" class="">delete(url)</h2><h2 id="c7bf2064-3561-4004-bf2d-05f0d534d42d" class="">head(url)</h2><h2 id="8fc4778e-3fb5-4c28-9096-ed54f86ef791" class="">options(url)</h2><h2 id="1ac38471-4a53-4424-8220-92231e14d137" class="">response 訪問後回傳值操作</h2><ul id="5ca0c29d-823b-4dcc-8790-c16b135d6c8d" class="bulleted-list"><li style="list-style-type:disc">content</li></ul><ul id="60dc63bf-8a91-4bab-846a-a81e129a06aa" class="bulleted-list"><li style="list-style-type:disc">text</li></ul><ul id="97023816-051f-4666-859e-dada7bdc6917" class="bulleted-list"><li style="list-style-type:disc">status_code</li></ul><ul id="90f88e23-86be-4e1b-8711-2ad4f16bc342" class="bulleted-list"><li style="list-style-type:disc">headers</li></ul><ul id="62e978ad-b126-4651-b6fd-3bf8d2c0a685" class="bulleted-list"><li style="list-style-type:disc">encoding</li></ul><ul id="c83e55d0-b052-441d-a61f-49b33a1fe051" class="bulleted-list"><li style="list-style-type:disc">json()</li></ul><ul id="02fac8da-5872-464d-86b5-a94552887ff6" class="bulleted-list"><li style="list-style-type:disc">raw 、raw.read(length)</li></ul><h3 id="7046363a-4c7f-4c5b-9e68-e385824b6b71" class="">response.content 與 response.text差別</h3><p id="37552aa9-4c2f-413f-9a73-d87a495bdbdc" class="">content是回傳一個bytes型態，text則是正常字串。</p><h1 id="54029d82-5fc8-44e0-8305-8946293429f0" class="">其他庫</h1><ul id="98cec246-5e34-4cd5-9c26-e99603836089" class="bulleted-list"><li style="list-style-type:disc">pytesseract(pytesseract-OCR 驗證碼 繞過)</li></ul><ul id="69a03c3a-2f7a-4725-97cf-944309b33221" class="bulleted-list"><li style="list-style-type:disc">redis(ProxyPool 代理ip)</li></ul><p id="76646fe5-2d43-4810-a313-4ade68a552cc" class="">
+</p><h1 id="21da4462-ca40-479b-b3fd-5e27bca9025e" class="">補充</h1><p id="065e4c39-4ff9-4604-97ec-1c65b946902e" class="">圖片、影片下載，binary字串型態寫入</p><pre id="066203f5-131b-4b94-a336-088715e8bd2a" class="code"><code>dirpath = &#x27;資料夾&#x27;
+imgurl = &#x27;https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg&#x27;
+if not os.path.exist(dirpath):
+		os.mkdir(dirpath) 
+with open(dirpath + f&#x27;/picture.jpg&#x27;,&#x27;wb&#x27;) as f:
+     f.write(img.content)</code></pre></div></article></body></html>

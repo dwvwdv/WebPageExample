@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Shell上傳</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4473de06-92ea-4a65-bac5-7c5e2201d6d0" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⏫</span></div><h1 class="page-title">Shell上傳</h1></header><div class="page-body"><nav id="1106a6bc-23c4-46bf-815d-6b184da11868" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a91f4264-bec8-4d3b-bda2-860d91dc0bfa">前端判斷</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#75e16a30-d0c0-4a3d-9ba7-53ad3a5ca668">後端判斷</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7fa96046-9508-48d1-a556-50bf09b224c9">檢查上傳檔案副檔名</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#55451bd1-bb1e-436e-b31d-94ef749fe059">多副檔名手法</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#31c73f66-71d0-4e51-8503-a330acca6315">圖片馬手法</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5dc7fc81-8c70-44eb-a5be-882fbec869e8">副檔名空格、點手法</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a7ae17aa-5883-4ea9-ad94-861fbbe1ffb8">NTFS特性::$DATA繞過手法</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#32a42402-b814-4504-9849-01ed5e3fcc9a">雙寫手法</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b55d39db-83f4-4153-9afd-f89948cd07a6">檢查Content-Type</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3a25542e-6ce6-45fe-991a-22455873b37d">POST封包構造Shell</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#696f8173-f73c-4979-b4cd-59ba38f39ecd">條件競爭</a></div></nav><h3 id="a91f4264-bec8-4d3b-bda2-860d91dc0bfa" class="">前端判斷</h3><p id="fa2c119d-213d-4baf-837d-c3ec58ece411" class="">檔案上傳前端處理判斷副檔名的一律將js封鎖停用，停用後重新載入頁面即可上傳</p><h1 id="75e16a30-d0c0-4a3d-9ba7-53ad3a5ca668" class="">後端判斷</h1><h2 id="7fa96046-9508-48d1-a556-50bf09b224c9" class="">檢查上傳檔案副檔名</h2><p id="beda04a7-2943-4fd3-b147-ba041c381773" class="">通常會檢查各類敏感副檔名，php、php3、php5、pthml、jsp、jsP等等。</p><h3 id="55451bd1-bb1e-436e-b31d-94ef749fe059" class="">多副檔名手法</h3><p id="5424647f-183c-4ad6-8e55-50dbbaaa3ee6" class="">apache中的主配置<mark class="highlight-teal">httpd.conf</mark>有一個DefaultType引數，用來處理未知副檔名，這個引數預設是 <mark class="highlight-teal"><strong>text/plain</strong></mark><mark class="highlight-teal"> </mark>，遇到未知副檔名，會先判斷有沒有其他副檔名，順序是由右邊往左開始找起，如果沒有，則直接當<code>txt、html</code>處理。</p><p id="e3bffead-5ee2-4a95-af65-0796db9959b7" class="">上傳一個檔案<code>shell.php.aaa</code>，apache解析方式為最後的aaa無法解析，則往左檢查，能是一種繞過手法。</p><h3 id="31c73f66-71d0-4e51-8503-a330acca6315" class="">圖片馬手法</h3><p id="92cd780b-038f-40fd-9ef5-f33a0a78fc93" class="">將圖片檔寫入php指令進行合成</p><pre id="29bfbba4-6e3f-4404-b4c7-e2c012b757b5" class="code"><code>copy filename.jpg/b + shell.php getshell.jpg </code></pre><p id="3b9b4555-6e69-4def-baca-180539d7055e" class="">進行合成後上傳<code>getshell.jpg</code>即可，同時配置一個<code>.htaccess</code>上傳，告訴伺服器這個檔案運行php、jsp指令</p><pre id="2f49abac-9411-49e4-bbe5-6735491bcd1b" class="code"><code>&lt;FilesMatch &quot;pic.jpg&quot;&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;</code></pre><h3 id="5dc7fc81-8c70-44eb-a5be-882fbec869e8" class="">副檔名空格、點手法</h3><p id="c41b5a5d-6921-4ce2-be7a-83de5e29fa58" class="">沒有檢查副檔名是否摻雜空格、點，可在副檔名尾部中加入空白、點。</p><p id="891178ad-ada0-4f65-a721-3dcd6a67e590" class="">有以下幾種狀況能使用</p><ul id="df92edf3-f931-4894-8c62-cd02f8fa7f4b" class="bulleted-list"><li style="list-style-type:disc">windows server</li></ul><p id="234cdb29-728b-49f5-ae0e-7a92078cb60f" class="">windows特性之一，將空白和點會自行修飾掉，windows不允許檔名最後結尾為點或空白。</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="8e4c7bc0-80f5-4b86-9625-7b9e46eb8170"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">在練習抓包修改副檔名時傳過去時一直上傳失敗，沒能找出原因。</div></figure><ul id="f72d315b-f88a-4705-87f5-aa578823d5c3" class="bulleted-list"><li style="list-style-type:disc">CVE-2015-2348<p id="1a40d50c-f9ce-4078-86f1-84928f2442ec" class="">影響範圍</p><ul id="137dd223-3a91-4170-b831-6de3da7a69a9" class="bulleted-list"><li style="list-style-type:circle">PHP 5.4.38~5.6.6</li></ul></li></ul><p id="53a55be3-f88f-498a-8468-395f0ce20b16" class="">老舊版本的php漏洞，太少見，但還是提一下，靠的是<mark class="highlight-teal">move_uploaded_file()</mark>函式那段時間的漏洞</p><blockquote id="495cfc49-f229-4582-84b8-32623c97142d" class="">shell.php .jpg</blockquote><p id="7c89d8cf-71f3-4d47-a912-49ee2dd31527" class="">php在截斷\00，後面的.jpg被丟棄</p><h3 id="a7ae17aa-5883-4ea9-ad94-861fbbe1ffb8" class="">NTFS特性::$DATA繞過手法</h3><p id="8d9590e5-f0c2-4c3e-ac46-0d1e1404df8c" class="">上傳檔案如果沒有檢測<code>::$DATA</code>，可以抓一下包，直接在副檔名後面添加進行繞過。</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="b61d4b60-c3ca-4491-a200-fc9e1fdcc35a"><div style="font-size:1.5em"><span class="icon">🔗</span></div><div style="width:100%">延伸閱讀：https://www.notion.so/dwvwdvnote/Shell-4473de0692ea4a65bac57c5e2201d6d0#9c90b3437eea452faeda245e43a4c944</div></figure><h3 id="32a42402-b814-4504-9849-01ed5e3fcc9a" class="">雙寫手法</h3><p id="1283302b-e9b1-49bd-af8c-51ddaefc866b" class="">移除副檔名php、jsp、asp等等，透過寫兩次檔名繞過，如：<code>shell.pphphp</code></p><h2 id="b55d39db-83f4-4153-9afd-f89948cd07a6" class="">檢查Content-Type</h2><p id="278872c4-1fd9-47f1-a286-120332b3e64b" class="">將Content-Type修改為符合的格式欺騙傳送。</p><p id="3e49a093-5da8-413f-b8e0-6ef17be2e8bd" class="">
+</p><h2 id="3a25542e-6ce6-45fe-991a-22455873b37d" class="">POST封包構造Shell</h2><p id="862c43ec-8b47-49ab-8042-b53897fc71e5" class="">若網站本身有可以執行任意檔案的漏洞，可在上傳封包裡直接構造，接近無視任何檢測。</p><p id="af6dd649-e7bc-4aba-8338-d86977f8d23b" class="">像以下這種有<code>include.php</code>檔案在網頁本身上</p><pre id="6d407819-087c-4690-957e-5decb6bf2f5c" class="code"><code>&lt;?php
+/*
+本页面存在文件包含漏洞，用于测试图片马是否能正常运行！
+*/
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+$file = $_GET[&#x27;file&#x27;];
+if(isset($file)){
+    include $file;
+}else{
+    show_source(__file__);
+}
+?&gt;</code></pre><p id="88a443ba-d05a-4d16-9fbb-b478f913f352" class="">在上傳的檔案後，得到path，直接傳進file做執行裡做執行</p><pre id="a9ea56ab-0331-4a8c-9bbd-11a4642852f1" class="code"><code>http://192.168.178.31/upload-labs/include.php?file=./upload/9420210712102913.gif</code></pre><h2 id="696f8173-f73c-4979-b4cd-59ba38f39ecd" class="">條件競爭</h2><p id="22a969e6-d4aa-443f-9e50-8f15a252b9c2" class="">開發者忽略了伺服器併發執行多線程而產生的問題，沒有對上傳進行鎖操作或同步操作，上傳shell.php</p><p id="2edcd077-73ea-4ed0-9d49-c0e9fc1d6d1c" class="">大致上的邏輯順序是這樣</p><ol type="1" id="2d507d1c-0854-4850-a8bf-8b09a775d0d1" class="numbered-list" start="1"><li>move_uploaded_file()上傳檔案</li></ol><ol type="1" id="41d39550-5c29-41c8-80af-6d09fd7a5d08" class="numbered-list" start="2"><li>檢查檔案副檔名</li></ol><ol type="1" id="141add8f-29b2-408d-bc47-5250d02620fd" class="numbered-list" start="3"><li>副檔名不允許，刪除檔案</li></ol><p id="92192e69-d528-4b80-87f8-c98779ed6172" class="">看似沒有問題，但在伺服器執行時，多線並行的特性，可以寫一個php讓伺服器刪除，但在刪除之前訪問這個頁面讓他執行</p><pre id="821b8c78-82da-4e61-8ccf-7d589583f724" class="code"><code>&lt;?php
+	$file = fopen(&quot;sh.php&quot;,&quot;w&quot;);
+	fputs($file,&#x27;&lt;?php phpinfo();?&gt;&#x27;);
+?&gt;</code></pre><p id="2a899b48-8c54-4a41-acb7-64e06a8bba8d" class="">不斷上傳，同時瀏覽<code>shparent.php</code>頁面，一旦瀏覽成功，則代表<code>sh.php</code>生成完畢</p><p id="1635d9e0-2c42-4da6-9c93-b72eb14657e2" class="">
+</p></div></article></body></html>

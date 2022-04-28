@@ -18,15 +18,58 @@ a{
     color:#0005A0;
 }
 
+button:hover{
+    font : "Arial";
+    font-size : 18px;
+    background-color: #123456;
+}
+
 button{
     border-radius: 3px;
-    font: 9pt "Arial";
+    font : "Arial";
     font-size: 20px;
     background-color: #000000;
     color: #00EEA0;
     padding-top:0px;
+    margin: 1px;
+    width:95%;
 }
 
+::-webkit-scrollbar {
+
+      width: 7px;
+
+    }
+
+    ::-webkit-scrollbar-button {
+
+      background: transparent;
+
+      border-radius: 4px;
+
+    }
+
+    ::-webkit-scrollbar-track-piece {
+
+      background: transparent;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+      border-radius: 4px;
+
+      background-color: rgba(0, 0, 0, 0.4);
+
+      border: 1px solid slategrey;
+
+    }
+
+    ::-webkit-scrollbar-track {
+
+      box-shadow: transparent;
+
+    }
 
 .whoami{
     text-align:center;
@@ -37,7 +80,8 @@ button{
     float:left;
     color:#004CA0;
     width:20%;
-    line-height:40px;  
+    line-height:40px;
+
 }
 .followDiv{
     float:left;
@@ -49,6 +93,8 @@ button{
     background-color: #000000;
     position:fixed;
     margin:5px; 
+    border-radius: 5px;
+    text-align:center;
 }
 
 .rightFollowDiv{
@@ -61,6 +107,7 @@ button{
     position:fixed;
     margin:15px;
     top:57%;
+    border-radius: 5px;
 }
 
 .rightDiv{
@@ -72,7 +119,7 @@ button{
 .centerDiv{
     float:left;
     width:60%;
-    height:700px;
+     height: 100vh; 
 }
 
 

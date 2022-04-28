@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assembly</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="265a52f4-900d-4734-ac14-de6c09e9bbf6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪢</span></div><h1 class="page-title">A<em>ssembly</em></h1></header><div class="page-body"><figure id="8c39f8ec-d439-43e3-aae2-e76ada77c62c" class="link-to-page"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D%208c39f8ecd43943e3aae2e76ada77c62c.html"><span class="icon">🔧</span>工具安裝</a></figure><figure id="12bac5c2-1846-4319-a500-73161cb56124" class="link-to-page"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/GDB%E8%AA%BF%E8%A9%A6%2012bac5c218464319a50073161cb56124.html"><span class="icon">🔨</span>GDB調試</a></figure><figure id="8c0a493a-8efe-4a4c-aa7e-1e3d59139706" class="link-to-page"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/IDA%20%E8%AA%BF%E8%A9%A6%208c0a493a8efe4a4caa7e1e3d59139706.html"><span class="icon">🪛</span>IDA 調試</a></figure><p id="2b07c589-89d5-4c38-b3b6-0bf0afdf8dd8" class="">
+</p><nav id="353c2082-2434-4135-849a-57bdf2fb3e4b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6b07e5d5-e6a4-4b5d-8bb3-ca6658906796">前言</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0e50f7ba-8b4a-4e0e-9482-ea16b7a936f6">編譯過程</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c1eb2efd-8ec3-4ddf-9523-96871af90f2f">簡易理解暫存器</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0566a266-28ed-46d2-ba1f-a28ee1931e37">Assembly Code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#12537812-4171-419d-b429-d7f8ff7087e9">常見指令</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#17364c81-c3aa-476d-9e11-f761c8f8fced">lea</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#87c2e572-362f-4513-8cc5-6a217d3f7a21">cmp</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f0fe588e-400a-4031-8531-2c34b68d6d4b">test</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2468452f-6132-448a-8c45-50aae99593dc">jcc跳轉系列</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#921f1f82-4c19-48a5-8ac6-8a283aa68f23">ptr解釋</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9f860f79-8d83-4135-a4c5-9965c1d7fc94">預設邊譯、nopie、static</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#33f8e507-f0f7-44b6-8d08-7be9a4a3fb6e">三者特點</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2da66a9a-7c9d-409f-aa6f-e5111b813773">socat、nc遠程調試</a></div></nav><h1 id="6b07e5d5-e6a4-4b5d-8bb3-ca6658906796" class="">前言</h1><blockquote id="b98421fb-6ce2-46ef-a3bf-ec8b99dc9816" class="">各家CPU廠商組合語言略有不同，但大同小異，
+在這種狀況下，先學習intel CPU的組合語言即可。<p id="210f5214-1bfa-4fc9-b33a-d1e03f3fb1f6" class=""><strong>intel官網有白皮書可以查看指令功能</strong></p><p id="9b408998-ac1c-42a4-9af8-f2eb4cddc17d" class="">x86 為32位元 x64 為64位元 x86</p></blockquote><p id="857a9555-a153-4c08-9434-351c246c1ecc" class="">學習環境 : Intelx64 的組合語言</p><p id="97db3846-fdac-48a3-a524-c6e22a8bae5a" class="">組合語言的優化，當有多種方式能達成目標，會盡量挑更短的語句實現</p><h1 id="0e50f7ba-8b4a-4e0e-9482-ea16b7a936f6" class="">編譯過程</h1><p id="118f7552-b099-4d7e-9b26-25e7ad25cdc4" class="">C/C++等高階語言 → 組合語言 → 機器碼</p><p id="998d74bb-ddfe-4fb1-bfa0-dd96618f2487" class="">高階語言經過編譯，產生組合語言，組合語言匯編轉成機器碼</p><p id="3672964b-5106-4a13-be74-0012f1f2bd6d" class="">
+</p><p id="dd1cd61a-3297-4002-872b-61d779b7ae21" class="">一個可執行程式 可以用一些指令去檢測它</p><ul id="af339b98-9246-4737-8983-e7572b4e4328" class="bulleted-list"><li style="list-style-type:disc">file [file]</li></ul><ul id="f52ca8f3-6822-4f01-944c-6839d9b6798f" class="bulleted-list"><li style="list-style-type:disc">objdump [file]</li></ul><ul id="22efd4bb-c8c0-4c59-886d-18f2d440cf0b" class="bulleted-list"><li style="list-style-type:disc">readelf -a [file]</li></ul><ul id="9fcd9a19-3168-4073-a177-66955c59e722" class="bulleted-list"><li style="list-style-type:disc">ldd nm hexdump strings</li></ul><ul id="59088a69-38e0-4612-a8a5-f8ae4923352a" class="bulleted-list"><li style="list-style-type:disc">gdb</li></ul><ul id="841823ea-f7ce-4ded-8b0f-587dfdfbd36f" class="bulleted-list"><li style="list-style-type:disc">socat</li></ul><h1 id="c1eb2efd-8ec3-4ddf-9523-96871af90f2f" class="">簡易理解暫存器</h1><figure id="2bff919d-0ad8-4d7e-b5ff-2267055e0364" class="image"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_002.png"><img style="width:672px" src="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_002.png"/></a></figure><ul id="f484b998-7d8d-4c15-a72f-77b29a3a601b" class="bulleted-list"><li style="list-style-type:disc">r<strong>ax、rbx、rcx、rdx、rsi、rdi、rbp、rsp、r8~r15</strong>，可以看做<em><strong><mark class="highlight-red">都是一樣的東西，</mark></strong></em><strong>arm架構則是r0到r31</strong></li></ul><ul id="c1cdb1ea-c6f0-4102-9c99-e5630427f66f" class="bulleted-list"><li style="list-style-type:disc">rip則是存放當前指令的位址</li></ul><ul id="208589db-6cf3-4c75-a3ca-b531b30db592" class="bulleted-list"><li style="list-style-type:disc">cs、ss、ds、es，不必糾結，歷史性的東西</li></ul><ul id="9d9d90c9-8a66-48a9-9e26-934cb6f21b19" class="bulleted-list"><li style="list-style-type:disc">fs、gs較為常用</li></ul><ul id="736d1629-53d9-489e-ae5c-6e071b358dcf" class="bulleted-list"><li style="list-style-type:disc">eflgs 與JCC指令配套，JCC就是用來跳轉的</li></ul><p id="c73b30c0-c377-45b9-889b-ac3944f90925" class="">雖說rax到r15都是一樣的，但現在約定成俗的狀況是，<strong><mark class="highlight-red">rbp與rsp管控靜態記憶體(棧內存)，而rax則用來接收return的值。</mark></strong></p><h1 id="0566a266-28ed-46d2-ba1f-a28ee1931e37" class="">Assembly Code</h1><h2 id="12537812-4171-419d-b429-d7f8ff7087e9" class="">常見指令</h2><p id="8161fe55-1cb9-418e-97f8-d3159a454e31" class="block-color-teal_background"><mark class="highlight-purple"><strong>mov、add、sub、lea、push、pop、cmp、jmp、jcc、call、leave、ret</strong></mark></p><p id="f16e7076-0547-49cc-858e-6fe9967ccbed" class="">大部分都很直觀好理解，其中值得拿出來講的有以下幾個：</p><h3 id="17364c81-c3aa-476d-9e11-f761c8f8fced" class="">lea</h3><p id="15bf437b-71d1-4e9f-9506-a266b96aacb1" class="">全名Load effective address，以前用來載入地址，現在用來做計算，例如 +8 +5等等，他可以不用改變後者的值，而且指令短，不用先sub後再mov</p><h3 id="87c2e572-362f-4513-8cc5-6a217d3f7a21" class="">cmp</h3><p id="2973be89-2944-453d-8c2b-4aa0e67bf924" class="">類似sub指令，舉個例子</p><p id="c7c1b566-e9c3-4fae-9854-9f58a32169fa" class="">sub a1,0x20  →  a1 = a1-0x20</p><p id="eb073f29-08f4-466b-a73d-4afb17606328" class="">cmp a1,0x20 →  a1-0x20</p><p id="4e1ae818-9d9a-4acb-bf1f-3c49f63a1c57" class="">cmp不存取結果，而將a1-0x20給之後的JCC進行判斷怎麼跳轉</p><h3 id="f0fe588e-400a-4031-8531-2c34b68d6d4b" class="">test</h3><p id="fd1c2e9d-a4ba-4f4f-b050-765e8a06cbce" class="">test跟上面cmp有異曲同工之妙，對比的是and</p><p id="74118300-d116-4675-ae2f-e3c80b188517" class="">and eax,eax → eax = eax&amp;eax</p><p id="11217c33-563b-4309-9a37-bd089f17b3b4" class="">test eax,eax → eax&amp;eax</p><p id="2863dda9-2aeb-4afa-9922-528677e60048" class="">假設是像上面這樣，<mark class="highlight-teal">這個指令可以直接看作是 cmp eax,0，eax是不是等於0</mark></p><h3 id="2468452f-6132-448a-8c45-50aae99593dc" class="">jcc跳轉系列</h3><p id="516d00de-6d9c-4c85-a147-02f1a290c41a" class="">遇到再查，其中許多指令一模一樣(例如JE、JZ，不用糾結)，跳轉跟標記位有關</p><h2 id="921f1f82-4c19-48a5-8ac6-8a283aa68f23" class="">ptr解釋</h2><ul id="41338849-331c-4ebd-a917-20f5114cd5d1" class="bulleted-list"><li style="list-style-type:disc">BYTE             8</li></ul><ul id="65026a61-a5b7-46d4-a03a-f7f692ef59a3" class="bulleted-list"><li style="list-style-type:disc">WORD        16</li></ul><ul id="86d1170d-ea78-4020-9766-2dcef69ed86b" class="bulleted-list"><li style="list-style-type:disc">DWORD      32</li></ul><ul id="9e503053-9867-4c7e-ba6f-6db6d32bb0f5" class="bulleted-list"><li style="list-style-type:disc">QWORD      64</li></ul><p id="65f5b131-8b17-4a6e-98aa-5becd5875295" class="">
+</p><h1 id="9f860f79-8d83-4135-a4c5-9965c1d7fc94" class="">預設邊譯、nopie、static</h1><pre id="06e6e9d0-211b-4913-a6b9-9a90c84a09bc" class="code"><code>gcc [file] -static -o [file]
+gcc [file] -no-pie -o [file]</code></pre><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="e3422d54-b546-4e88-8b93-45f98bdb3deb"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">其中還有許多 -O1 -O2 -O3之類的參數，預設是-O1，-O3會優化到讓反編譯的assembly長的非常奇怪</div></figure><h2 id="33f8e507-f0f7-44b6-8d08-7be9a4a3fb6e" class="">三者特點</h2><p id="ed37daf2-155e-44d3-8a1a-03760c3f11a3" class="">預設編譯會有偏移，nopie則不偏移，static檔案會很大，</p><p id="62ea5d67-d80c-43a2-a2e9-54a8502938e8" class="">file指令可以檢查是不是靜態(static)的</p><p id="a9942cdb-0a1d-44a6-bc7e-71b3698ebdfb" class="">靜態的不能使用ldd</p><h1 id="2da66a9a-7c9d-409f-aa6f-e5111b813773" class="">socat、nc遠程調試</h1><p id="ba5a1b1f-0c93-403d-9d64-dd65e2b63585" class="">佈署通道</p><pre id="fd9e05ab-d306-425d-abe2-8d60e3bac0ce" class="code"><code>socat tcp-l:8888,fork exec:./[filename],reuseaddr</code></pre><p id="410e1dbe-c7cb-4325-a921-5fa385fc6db6" class="">嘗試連接</p><pre id="758d52a7-0548-48d5-bb3c-bd04b2344ea0" class="code"><code>nc 127.0.0.1 [port]</code></pre><p id="68b91cf6-c0f0-4e3e-a17a-27af574626c7" class="">沒問題就直接調用腳本連接、調試或載入payload</p><pre id="f745b9e8-78f0-41f5-9a1c-0e3ed831f482" class="code"><code>import socket
+import telnetlib
+import struct
+
+def P32(val):
+    return struct.pack(&quot;&quot;,val)
+
+def pwn():
+    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((&quot;127.0.0.1&quot;, 8866))
+    #system_addr = P32(0x080483A0)
+    #binsh_addr = P32(0x08048610)
+    payload = &#x27;A&#x27;*8 +&#x27;a&#x27;
+    s.sendall(payload.encode())
+    t = telnetlib.Telnet()
+    t.sock = s
+    t.interact()
+
+if __name__ == &#x27;__main__&#x27;:
+    pwn()</code></pre><p id="2d1f120d-0789-41a4-ad12-0f662e2a9ecb" class="">
+</p><figure id="84ed5026-d07f-4e2c-9402-88a3d22e6a3a" class="image"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_004.png"><img style="width:1218px" src="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_004.png"/></a></figure><figure id="f259b712-c973-4c22-9874-820170c1741a" class="image"><a href="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_003.png"><img style="width:1220px" src="Assembly%20265a52f4900d4734ac14de6c09e9bbf6/Image_003.png"/></a></figure><p id="3dad5223-b730-479a-a8b3-bf849ecfa82c" class="">一次透過pwn的get shell</p><p id="3d4ecdd1-9341-4451-9753-36f635f619e7" class="">
+</p></div></article></body></html>

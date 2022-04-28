@@ -1,0 +1,761 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>C++</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="be14941f-53fc-4eef-b51f-c61adc800189" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📗</span></div><h1 class="page-title">C++</h1></header><div class="page-body"><figure id="24d34b1d-c12f-4117-be1a-1a855098fd5c" class="link-to-page"><a href="C++%20be14941f53fc4eefb51fc61adc800189/C++11%2024d34b1dc12f4117be1a1a855098fd5c.html"><span class="icon">🪄</span>C++11</a></figure><figure id="d45fab2a-e24d-4463-b867-f6319e26f29d" class="link-to-page"><a href="C++%20be14941f53fc4eefb51fc61adc800189/C++Qt%20d45fab2ae24d4463b867f6319e26f29d.html"><span class="icon">🛠️</span>C++Qt</a></figure><figure id="30ac5ed5-985f-4ab2-bf2c-bbdeea792149" class="link-to-page"><a href="C++%20be14941f53fc4eefb51fc61adc800189/Class%E7%9A%84%E7%89%B9%E6%AE%8A%E6%88%90%E5%93%A1%2030ac5ed5985f4ab2bf2cbbdeea792149.html"><span class="icon">🧵</span>Class的特殊成員</a></figure><nav id="08a2f27c-98d4-40d1-baa4-f83468cbb923" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ad54d583-fb36-4389-8021-87bdb436f38c">工作流程</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c7259236-ab2a-4359-9239-ecaa759ef805">C++特性</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ce97508b-cf7f-40c5-afde-d92157633e90">先來聊聊左值右值</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b66f1503-2b8b-4e9d-b3c9-c32e835f2ef8">左值(lvalue)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c830e8f6-f76f-489c-8ff3-20e76d6321e4">右值(rvalue)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#294c97e6-b184-4e40-a4a7-35a6ee464f70">const修飾詞</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c645da02-5809-4d39-af91-c5afcf2729e8">const與指標</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dcb0d66b-266c-48e1-af18-6265a8df4b0f">RAII機制</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b22a0c24-d7a4-416c-9221-25b4866573e7">資源定義</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#27efccfa-72fe-4b8f-8c6e-b09a39c5c8e9">右值引用</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#735c8d35-2e27-4756-ac4f-1e4062564abc">lambda</a></div></nav><h1 id="ad54d583-fb36-4389-8021-87bdb436f38c" class="">工作流程</h1><figure id="b41807ce-d9f4-473e-88ca-f2961df737a2"><div class="source"><a href="https://whimsical.com/c-34DiqHd96KNwFQ9VHk12aK@2Ux7TurymNGrv63iP5PW">https://whimsical.com/c-34DiqHd96KNwFQ9VHk12aK@2Ux7TurymNGrv63iP5PW</a></div></figure><h1 id="c7259236-ab2a-4359-9239-ecaa759ef805" class="">C++特性</h1><h2 id="ce97508b-cf7f-40c5-afde-d92157633e90" class="">先來聊聊左值右值</h2><div id="1a2bcd73-3623-494d-8363-88dea267a93e" class="column-list"><div id="d7e91b10-d629-406e-b5af-b1fdc924ebae" style="width:50%" class="column"><h3 id="b66f1503-2b8b-4e9d-b3c9-c32e835f2ef8" class="">左值(lvalue)</h3><div><ul id="5caa5c65-cc0d-4d15-85a3-e3076f1c8ec7" class="bulleted-list"><li style="list-style-type:disc">可修改的左值</li></ul><ul id="fda1dd38-7357-4699-9817-5b5aa156c54e" class="bulleted-list"><li style="list-style-type:disc">不可修改的左值</li></ul></div></div><div id="f897c144-e844-41e6-9c31-bf2a90775e73" style="width:50%" class="column"><div><h3 id="c830e8f6-f76f-489c-8ff3-20e76d6321e4" class="">右值(rvalue)</h3><ul id="72fa4ab5-fd4d-42c6-afb1-a3645e1fde42" class="bulleted-list"><li style="list-style-type:disc">pure rvalue-純右值(字面量)</li></ul><ul id="6fd96954-ab02-4872-883b-c5e18f680568" class="bulleted-list"><li style="list-style-type:disc">eXpiring Value-將亡值</li></ul></div></div></div><p id="aadc45e9-2809-44f8-a0ed-55e42d8d319b" class=""><mark class="highlight-red"><strong>++i是左值，i++是右值。</strong></mark></p><p id="07e4fc05-4282-4c3d-aed5-163a7c064c91" class=""><mark class="highlight-red"><strong>i++是i被拷貝出來(一個ti，而 ti = t+1)，最終回傳的是ti，ti本身沒有空間存放他，所以是右值，++i在本身上進行+1(i = i+1)，故是左值。</strong></mark></p><p id="307399a7-47c1-47d2-a830-00f73accb917" class="">一個式子如果成立(能夠合法更動)，等號左邊的就是左值。</p><p id="e3373e9b-16ce-45fc-9945-057c982b467b" class="">
+</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="7442848e-475f-439d-9aa5-48f990fbf77e"><div style="font-size:1.5em"><span class="icon">📎</span></div><div style="width:100%">參考自<a href="https://www.cnblogs.com/youxin/p/3281645.html">https://www.cnblogs.com/youxin/p/3281645.html</a></div></figure><p id="b66bb147-0624-4146-86f2-c53782d945bf" class="">在C中，左值被定義為可修改的值，而在C++左值分為可修改的左值、不可修改的左值。</p><pre id="c6aaa348-db84-4a99-9080-80cb9a865739" class="code"><code>//不可修改的左值
+const int num = 10; // num 為左值
+num = 15;           // 但無法賦值</code></pre><p id="214604d9-1871-4dc4-8ade-b1e5967c7da3" class="">非A即B，不是左值的，就是右值，右值本身在記憶體區塊沒有空間存他，所以只存在於暫存器。</p><pre id="01890617-37f0-4929-be4d-f81dba6e30c6" class="code"><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    int n = 10;
+    int *p = &amp;n ;
+
+    printf(&quot;n 的位址：%p\n&quot;, &amp;n);
+    printf(&quot;p 的位址：%p\n&quot;, &amp;p);
+    printf(&quot;*p的位址：%p\n&quot;, &amp;(*p));
+    return 0;
+}
+
+/*
+	 n 的位址：0061FF1C
+	 p 的位址：0061FF18
+	*p 的位址：0061FF1C
+*/</code></pre><h2 id="294c97e6-b184-4e40-a4a7-35a6ee464f70" class="">const修飾詞</h2><p id="441f86ed-efad-47cb-ad3c-6829c1837855" class="">const分為兩種</p><ul id="eed2ce99-c00e-451f-978e-8af05a77ae18" class="bulleted-list"><li style="list-style-type:disc">常數(又或者稱呼為編譯期常數)</li></ul><ul id="1714aa27-d791-4b16-aa87-86fc60377efd" class="bulleted-list"><li style="list-style-type:disc">只讀變數(又或者稱呼為執行期常數)</li></ul><p id="28691dee-9adb-46fe-86b5-b82616fcac59" class="">只有接受字面量初始化的值，才能進符號表，符號表的值是鎖死的，所以成為常數。</p><p id="30d8ec1f-2df9-4e04-90e0-de069146066b" class="">有一個例外，被volatile修飾的const哪怕接受字面量初始化，也不會進入符號表，是只讀變數。</p><p id="d41b9925-3c30-4a21-a96c-624405822227" class=""><mark class="highlight-blue">編譯期間能確定初始值的，就是常數(除了添加volatile修飾狀況)。</mark></p><h2 id="c645da02-5809-4d39-af91-c5afcf2729e8" class="">const與指標</h2><ul id="e31c5748-0cd8-402c-af41-21f140879f15" class="bulleted-list"><li style="list-style-type:disc">const int  : int型態的一個常數。</li></ul><ul id="d3590354-683d-49a5-9170-6e345dd17e99" class="bulleted-list"><li style="list-style-type:disc">const int *  、 <del>int const *</del> : 指向一個常數int型態的指標，指標本身可變動。</li></ul><ul id="875c94dd-df9b-4cea-a66d-a7abfdd2aae5" class="bulleted-list"><li style="list-style-type:disc">int * const  : 指向int型態的常數指標，指標本身不可變動。</li></ul><ul id="f558c0b4-bd6f-4b9c-a6ad-68d3c05a1532" class="bulleted-list"><li style="list-style-type:disc">const int * const : 指向一個常數int型態的const指標，指標本身不可變動。</li></ul><p id="c943a9f3-90ea-4b40-8cde-bb8c57f6431c" class="">
+</p><p id="c531962b-2a50-4029-b4f6-1859e505824d" class="">第二條，兩種是一樣的，都可以理解為指向const int 的一個指標，第三種則是屬於指向int的const指標，第四種是指向const int的const指標。</p><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="e925a790-6a06-459e-99eb-93f3c0efd825"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">int const * 我認為是糟糕的寫法，容易誤解，破壞邏輯性，不應該存在。</div></figure><h1 id="dcb0d66b-266c-48e1-af18-6265a8df4b0f" class="">RAII機制</h1><p id="748dc657-cd6d-497f-bbc8-3c9cdf0d317d" class="">C++管理資源、避免洩漏的慣用法。利用的是C++建構物件最終會被銷毀的原則。RAII使用一個物件，建構時獲取對應資源，在物件生命週期內控制對資源的訪問始終保持有效，最後物件解構，釋放建構時取地的<strong><mark class="highlight-blue">資源</mark></strong>。</p><p id="5ececbce-65ae-4e44-a90e-8e36aa2b93b0" class="">
+</p><h2 id="b22a0c24-d7a4-416c-9221-25b4866573e7" class="">資源定義</h2><p id="e40c1608-03d1-4999-a298-523f8692523d" class="">資源是有限的，且對系統正常運作有一定作用，例如：Socket(套接字)、mutex(互斥鎖)、File Handle(文件句柄)、記憶體等等，但資源有限，所以每次使用都必須遵循一個步驟：</p><ul id="d66f26d7-77ee-4ed4-8c4c-1fe0f64c8fff" class="bulleted-list"><li style="list-style-type:disc">申請資源</li></ul><ul id="8919b37f-1cd8-419d-b47d-6bfd99ce7c8c" class="bulleted-list"><li style="list-style-type:disc">使用資源</li></ul><ul id="2c3a2a75-2dfc-4947-980e-bf998c33cfb1" class="bulleted-list"><li style="list-style-type:disc">釋放資源</li></ul><p id="273058d6-7568-4345-8b63-54cab06c607c" class="">前兩步缺一不可，最後一步如果不釋放，會導致資源短缺，從而洩漏。</p><p id="a67b0191-eaa6-47ae-a882-beed958339b0" class="">
+</p><h1 id="27efccfa-72fe-4b8f-8c6e-b09a39c5c8e9" class="">右值引用</h1><p id="d67de8f0-34cb-443e-ba67-ec66b2195b9d" class="">讓一個常引用指向一個將亡值，那麼將亡值的生命週期將會延長到與這個常引用相同長度。</p><pre id="fbe4080b-d1be-479b-9f19-3cb13f0c97fe" class="code"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Apple{
+public:
+	Apple(){
+		int *App = new int[5];
+		cout &lt;&lt; &quot;create App malloc space.&quot; &lt;&lt; endl;
+	}
+	~Apple(){
+		delete [] App;
+		cout &lt;&lt; &quot;clear App malloc space.&quot; &lt;&lt; endl;
+	}
+	int *App = NULL;
+};
+Apple getApple(){
+	Apple a;
+	return a;
+}
+
+void setApple(const Apple &amp; a){
+	cout &lt;&lt; &quot;const reference.&quot; &lt;&lt; endl;
+}
+
+void setApple(Apple &amp;&amp; a){
+	cout &lt;&lt; &quot;right value reference.&quot; &lt;&lt; endl;
+}
+
+int main(){
+	const Apple &amp; apple = getApple();
+	setApple(apple);
+	cout &lt;&lt; &quot;End1&quot; &lt;&lt;endl;
+	
+	Apple a;
+	setApple(a);
+	cout &lt;&lt; &quot;End2&quot; &lt;&lt; endl;
+
+	setApple(getApple());
+	cout &lt;&lt; &quot;End3&quot; &lt;&lt; endl;
+    
+    return 0;
+}
+/*
+create App malloc space.
+const reference.
+End1
+create App malloc space.
+const reference.
+End2
+create App malloc space.
+right value reference.
+clear App malloc space.
+End3
+clear App malloc space.
+clear App malloc space.
+*/</code></pre><h1 id="735c8d35-2e27-4756-ac4f-1e4062564abc" class="">lambda</h1><pre id="71081f55-f073-4d9e-af04-ae2b2041863a" class="code"><code>[](int rank, String name) mutable throw() -&gt; int{
+	
+}
+
+//[=] 值傳遞
+//[&amp;] 址傳遞
+//[this] 可以取得當前類別所有成員
+//[varible] 值傳遞1個變數
+//[&amp;varible] 址傳遞1個變數
+
+//所有的值傳遞，都是帶const類的，如果要修改，需添加mutable
+//throw() 拋異常
+// -&gt; int 為返回值</code></pre><p id="1164e921-024e-4bb3-bf8c-900e33db08fb" class="">
+</p><p id="fbd2109d-1c4b-4682-b9f4-a01359a9edbb" class=""><div class="indented"><p id="7fceed70-75d6-4c1e-a189-a845d4cb6e88" class="">
+</p></div></p></div></article></body></html>

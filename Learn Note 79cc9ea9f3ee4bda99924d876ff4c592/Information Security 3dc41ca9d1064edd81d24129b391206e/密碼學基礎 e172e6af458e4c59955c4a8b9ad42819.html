@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>密碼學基礎</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e172e6af-458e-4c59-955c-4a8b9ad42819" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔐</span></div><h1 class="page-title">密碼學基礎</h1></header><div class="page-body"><div><p id="245b4238-efff-46c2-9669-a574b7786979" class="">發送端發送時
+M → Hash → 用自身私鑰加密Hash後的值 →  || (連接明文M)→ M || E(Hash(M))</p></div><div><p id="fa1096b1-f6b3-4968-9c48-22986e12a935" class="">接收方收到後
+M || E(Hash(M)) → 明文M的部分做一次Hash，同時簽名的部分使用簽章者的公開key做解密→比對是否一致→接受或拒絕</p></div><div id="c81e5344-256f-4410-be44-88cbb5ecf03b" class="column-list"><div id="8ff9cd0f-9384-4d00-8fee-ddb48c6bbf05" style="width:50%" class="column"><div><h3 id="762452bc-c66a-4386-badc-f71b3d807ce6" class="block-color-teal">密碼系統四大功能</h3><ol type="1" id="9406e4ed-1cfe-4f48-98b2-75adb395e930" class="numbered-list" start="1"><li>Secrecy 秘密性</li></ol><ol type="1" id="f7baf444-f409-48bd-b331-fe6b8ee4ff18" class="numbered-list" start="2"><li>Authenticity 鑑定姓</li></ol><ol type="1" id="2e099265-8363-46a0-8ae9-c94f921c340a" class="numbered-list" start="3"><li>Integerity 完整性</li></ol><ol type="1" id="1698eef0-aa13-4819-8324-a73576a6417f" class="numbered-list" start="4"><li>Non - repudiation 不可否認性</li></ol></div></div><div id="8840115f-7819-4642-b816-fe1365995ff8" style="width:50%" class="column"><div><h3 id="5f7c73cf-aa41-4c65-be45-1f7aebb58567" class="block-color-teal">密碼學基本要素</h3><ul id="f529c268-1bf7-4398-9c84-d0f2f31b6577" class="bulleted-list"><li style="list-style-type:disc">明文 M</li></ul><ul id="6d18518d-5c0f-4546-8e5a-6d3806eb63e9" class="bulleted-list"><li style="list-style-type:disc">密文 C</li></ul><ul id="c51b725d-c2b3-430f-8ea3-60912c568b4d" class="bulleted-list"><li style="list-style-type:disc">金鑰 K</li></ul><ul id="160b7f9a-c9f9-4703-b24b-8c1353a04670" class="bulleted-list"><li style="list-style-type:disc">加密函數 E()</li></ul><ul id="c96e2c0b-29f9-42de-873c-632962a5598a" class="bulleted-list"><li style="list-style-type:disc">解密函數 D()</li></ul><p id="4a5fe9d2-496b-4091-9d48-acadfa593fd1" class="">M = D(C)　　C = E(M)</p></div></div></div><div id="6d5f2fbb-647a-43be-919f-6e49f8da1967" class="column-list"><div id="6af1ace6-e637-48d5-ae30-b75acd7c761d" style="width:50%" class="column"><div><h3 id="b9ddea17-ca1d-4ac9-922c-afee0fce7562" class="block-color-teal">秘密金鑰缺點</h3><ul id="1a5f8fc3-f6cd-495a-b742-7305b9a3eb58" class="bulleted-list"><li style="list-style-type:disc">收發雙方如何獲得key</li></ul><ul id="8548c664-1adb-4747-a368-7e5bbeff36cf" class="bulleted-list"><li style="list-style-type:disc">金鑰數目太大</li></ul><ul id="c0a2b6e1-0d1c-442f-8889-54b6ec95bc1a" class="bulleted-list"><li style="list-style-type:disc">無法做到不可否認性</li></ul><p id="ab704d09-7870-4bc9-96f6-4af88bfe7579" class="">若有n個參與加密通訊，則需要保管n-1把鑰匙</p></div></div><div id="ef9f4c44-3ad4-40ce-b24c-08d8ee7cda4e" style="width:50%" class="column"><div><h3 id="9ef3b1cd-cda9-48cf-b9dc-7850e107bf41" class="block-color-teal">公開金鑰優點</h3><ul id="a95dc164-017c-4c84-a54d-f7fbf3df991c" class="bulleted-list"><li style="list-style-type:disc">加密金鑰可以公開</li></ul><ul id="870b8fd5-3624-4008-afd7-b73cbc337ce6" class="bulleted-list"><li style="list-style-type:disc">簡化金鑰分配管理</li></ul><ul id="f0a40732-2024-4b0e-8b7c-9805904d0b53" class="bulleted-list"><li style="list-style-type:disc">可做到不可否認性</li></ul><p id="0b95c4b2-52e1-4623-8a3f-6eb21a63102d" class="">公開金鑰只需保管好自身的私key即可</p></div></div></div><div><h2 id="5ba6b425-a501-4585-9ec5-e26300985660" class="block-color-teal">非對稱式金鑰加密</h2><p id="8c5ff870-7a07-40b2-8072-370af0f9a0f5" class="">使用自己的私有key加密，別人使用自己的公開key解密，為數位簽章</p><p id="72f0da89-37cb-4d53-8cc5-428c25332b2e" class="">使用對方的公有key加密，別人使用他自己的私有key解密，為機密通訊</p></div><h2 id="35c47c03-5448-40a1-8c11-2e020655859e" class="block-color-teal">簽章流程</h2><div id="adb651c0-a7e1-4241-a7e6-4b4326803391" class="column-list"><div id="295777b1-47c7-4b3d-aeea-fd909547bc16" style="width:50%" class="column"><div><p id="245b4238-efff-46c2-9669-a574b7786979" class="">發送端發送時
+M → Hash → 用自身私鑰加密Hash後的值 →  || (連接明文M)→ M || E(Hash(M))</p></div></div><div id="a3fc8900-2796-4898-aad8-f6f0745fec98" style="width:50%" class="column"><div><p id="fa1096b1-f6b3-4968-9c48-22986e12a935" class="">接收方收到後
+M || E(Hash(M)) → 明文M的部分做一次Hash，同時簽名的部分使用簽章者的公開key做解密→比對是否一致→接受或拒絕</p></div></div></div><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="3f883cda-926c-40b9-b189-42bd29c6e70b"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Hash產生的碰撞率要很低，以免造成錯誤判斷。
+不同input，相同output，雜湊破解，即為碰撞。</div></figure><p id="e4786375-13ef-46f8-bff3-c78949760ed8" class="">
+</p><div><h2 id="08c60962-99e3-46ba-8109-a8ca81efe0cb" class="block-color-teal">RSA</h2><h2 id="c4ccffa7-d0e6-40d4-9b9b-709e0f7a5d0a" class="">n = p * q</h2><p id="fe49008a-561c-476c-9081-368e645cc6d6" class="">￠(n) = (p-1)(q-1)</p><p id="b749d878-dd1e-498f-99c9-b146c22a9bcf" class="">p與q為兩個非常大的質數，計算￠(n)，比p*q小且與它互質的正整數有(p-1)(q-1)個。</p><h3 id="086c83d2-4fd0-4e68-865a-05785ee32081" class="">e * d = 1 (mod 20)</h3><p id="b67faf93-1278-48bf-92de-7f1d7721f194" class="">e需要跟 ￠(n)互質，且為質數，找出一個d，滿足上述運算式。</p></div><p id="6e0cec25-24f8-4d28-b068-5b737b39102f" class="">
+</p><h2 id="a6f4a44f-532b-4110-96d8-326edaddec3b" class="block-color-teal">SSL/TLS</h2><p id="3b204e0e-cd80-4f45-9f58-610f292c2bcd" class="">結合對稱與非對稱加密技術，先將對稱金鑰的key用非對稱金鑰加密技術傳送過去，完成後使用就是使用傳送過去的那一把對稱金鑰加密進行通訊。</p><p id="ee771586-6ddc-4404-a6b6-fffebb214c25" class="">
+</p><h2 id="7e3acc5d-0ee3-4372-ac08-fb90759aac45" class="block-color-teal">藏密學</h2><p id="d0196d66-fcf3-404d-ba8b-0b468f902a51" class="">將機密資訊隱藏起來，藏入一般檔案，表面上是一般檔案，卻加密了要傳送的訊息。</p><p id="f7396eca-fd02-47e8-bd3f-1ce12f861a09" class="">發展應用於：</p><ul id="b280f37a-d755-4680-baca-8cdeb1f7076c" class="bulleted-list"><li style="list-style-type:disc">機密通訊</li></ul><ul id="f92702ff-5fea-4369-be6a-db3496d95617" class="bulleted-list"><li style="list-style-type:disc">數位浮水印:各類型檔案上<ul id="761f0c0e-d2c1-4609-9cc5-8c1068a9e138" class="bulleted-list"><li style="list-style-type:circle">強韌型浮水印<p id="ccba754e-ac14-4dbd-8fb1-72e11d7645dd" class="">經過各種影像處理後，仍然能取出浮水印，此為強韌型浮水印。</p><p id="5035f878-90fc-4331-9966-788789e45870" class="">低頻，畫質下降許多。</p><p id="121fa55d-72ab-41ff-8ae7-2b687b1be35d" class="">可用於版權保護。</p></li></ul><ul id="d5fd4072-b3af-48a4-8d10-f1a12d4cd83e" class="bulleted-list"><li style="list-style-type:circle">脆弱型浮水印<p id="5d1a774b-64e6-4f53-b2f7-c0fc50dcae8b" class="">經過各種影像處理後，不能取出浮水印，此為脆弱型浮水印。</p><p id="0f3e1652-14c7-4299-84a1-f42573b869a5" class="">高頻，畫質不太影響。</p><p id="984d02ad-4c22-4e2d-8ed6-e41f94df9dfe" class="">可用於版權驗證。</p></li></ul><ul id="49aa36c5-db41-48c7-adec-7ee7386ffa89" class="bulleted-list"><li style="list-style-type:circle">半脆弱型浮水印<p id="0abf30d5-a5bd-4781-a233-05714f68d651" class="">特色介於脆弱與強韌型之間，此為半脆弱型浮水印。</p><p id="41e55fd0-8bef-4153-904c-cc262c9d47f3" class="">中頻，畫質略為下降。</p><p id="f06bd790-3737-4760-b380-f754ab37246d" class="">可用於版權驗證。</p></li></ul></li></ul><ul id="61230c23-ce31-473d-976c-2b73ac291b42" class="bulleted-list"><li style="list-style-type:disc">數位驗證：影像、email、視訊、數字型資料等等<ul id="d7c0984b-1e1e-4f9d-b0f9-97334d7ec993" class="bulleted-list"><li style="list-style-type:circle">真確性(Fidelity)：資料是否確實為真</li></ul><ul id="9bfdd97c-d403-4b4d-b174-2afbcb661525" class="bulleted-list"><li style="list-style-type:circle">完整性(Integrity)：判斷是否遭受修改</li></ul></li></ul><ul id="9db67df8-ed95-4bbd-97c5-8960d546dc7f" class="bulleted-list"><li style="list-style-type:disc">註解資訊嵌入<ul id="000953d9-f71e-4ede-9aac-4943ae143527" class="bulleted-list"><li style="list-style-type:circle">隨檔案移動</li></ul><ul id="6c76fa14-1073-4a51-b0d4-62637431ab0f" class="bulleted-list"><li style="list-style-type:circle">不怕檔名更動難以排序、搜尋</li></ul></li></ul><h2 id="a897ba6a-f6ac-4d10-a1ec-64b64106fdea" class="">LSB替換法</h2><p id="a1e6186e-ffa4-4a8f-9b5a-8fc0c29f76cb" class="">將最不重要的位元替換(低位元)，可在影像、聲音中處理，肉眼難以看出，改變的音檔也難以聽出</p><p id="814b66a3-24f9-4a74-a8f8-f8cb09cef182" class="">如：<code>10001000</code>改成<code>10001001</code>，將每個最低位改成要傳遞的資訊。</p><p id="66c9fd99-eeda-4f22-b2fb-71602171c676" class="">
+</p></div></article></body></html>
